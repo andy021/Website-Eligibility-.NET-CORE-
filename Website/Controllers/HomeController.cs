@@ -18,7 +18,6 @@ namespace Website.Controllers
     {
         private MyInfo _info = new MyInfo();
 
-
         //routes 
         [Route("")]
         [Route("[controller]")]
