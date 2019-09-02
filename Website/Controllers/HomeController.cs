@@ -38,22 +38,31 @@ namespace Website.Controllers
         [Route("[controller]/[action]")]
         public IActionResult Mail(string inputName, string inputEmail, string inputMessage)
         {
-            var message = new MimeMessage();
-            message.From.Add(new MailboxAddress(inputEmail));
-            message.To.Add(new MailboxAddress("skinybogies76@gmail.com"));
-            message.Subject = "Message from: " + inputName;
-            message.Body = new TextPart("plain")
+            try
             {
-                Text = inputMessage
-            };
-            using (var client = new SmtpClient())
+                var message = new MimeMessage();
+                message.From.Add(new MailboxAddress(inputEmail));
+                message.To.Add(new MailboxAddress("skinybogies76@gmail.com"));
+                message.Subject = "Message from: " + inputName;
+                message.Body = new TextPart("plain")
+                {
+                    Text = inputMessage
+                };
+                using (var client = new SmtpClient())
+                {
+                    client.Connect("smtp.gmail.com", 587, true);
+                    client.Authenticate("skinybogies76@gmail.com", "Tiger0210606");
+                    client.Send(message);
+                    client.Disconnect(true);
+                };
+                return RedirectToAction("Index");
+            }
+            catch (Exception exp)
             {
-                client.Connect("smtp.gmail.com", 587, false);
-                client.Authenticate("skinybogies76@gmail.com", "Tiger0210606");
-                client.Send(message);
-                client.Disconnect(true);
-            };
-            return RedirectToAction("Index");
+                ModelState.Clear();
+                ViewBag.Message = $" We have a problem here {exp.Message}";
+                return RedirectToAction("Index");
+            }
         }
     }
 }
