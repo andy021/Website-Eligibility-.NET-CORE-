@@ -26,6 +26,7 @@ namespace Website.Controllers
         public ViewResult Index()
         {
 
+
             HomeIndexViewModel homeIndexViewModel = new HomeIndexViewModel()
             {
                 pagetitle = "Hey, it's Andy!",
