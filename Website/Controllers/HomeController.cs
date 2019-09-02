@@ -24,6 +24,7 @@ namespace Website.Controllers
         [Route("[controller]/[action]")]
         public ViewResult Index()
         {
+
             HomeIndexViewModel homeIndexViewModel = new HomeIndexViewModel()
             {
                 pagetitle = "Hey, it's Andy!",
