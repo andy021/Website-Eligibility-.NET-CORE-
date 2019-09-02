@@ -43,7 +43,7 @@ namespace Website.Controllers
             {
                 var message = new MimeMessage();
                 message.From.Add(new MailboxAddress(inputEmail));
-                message.To.Add(new MailboxAddress("skinybogies76@gmail.com"));
+                message.To.Add(new MailboxAddress("aherr0210606@gmail.com"));
                 message.Subject = "Message from: " + inputName;
                 message.Body = new TextPart("plain")
                 {
